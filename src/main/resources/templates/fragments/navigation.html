@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Reusable Sidebar Fragment -->
+<aside class="app-sidebar" th:fragment="sidebar(activeNav)">
+  <div class="sidebar-header">
+    <div class="logo-icon-svg">
+      <!-- Custom SkillSwap SVG Logo (Curved reciprocal exchange arrows with leaf motif) -->
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 3h5v5"></path>
+        <path d="M4 20L21 3"></path>
+        <path d="M21 16v5h-5"></path>
+        <path d="M15 15l6 6"></path>
+        <path d="M4 4l5 5"></path>
+      </svg>
+    </div>
+    <div class="logo-text-group">
+      <h1>SkillSwap</h1>
+      <p>Student Exchange</p>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Core Platform</div>
+
+    <a th:href="@{/dashboard(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'dashboard' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+      </svg>
+      <span>Dashboard</span>
+    </a>
+
+    <a th:href="@{/matches(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'matches' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      <span>Smart Matches</span>
+      <span class="nav-badge-pill">Reciprocal</span>
+    </a>
+
+    <a th:href="@{/search(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'search' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <span>Explore Skills</span>
+    </a>
+
+    <a th:href="@{/skills(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'skills' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span>Manage Skills</span>
+    </a>
+
+    <a th:href="@{/requests(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'requests' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="16 3 21 3 21 8"></polyline>
+        <line x1="4" y1="20" x2="21" y2="3"></line>
+        <polyline points="21 16 21 21 16 21"></polyline>
+        <line x1="15" y1="15" x2="21" y2="21"></line>
+        <line x1="4" y1="4" x2="9" y2="9"></line>
+      </svg>
+      <span>Exchange Requests</span>
+    </a>
+
+    <a th:href="@{/students(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'students' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span>Student Directory</span>
+    </a>
+
+    <div class="nav-section-title">My Account</div>
+
+    <a th:href="@{/profile(studentId=${activeStudentId})}" 
+       class="nav-item" th:classappend="${activeNav == 'profile' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <span>My Profile</span>
+    </a>
+
+    <a th:href="@{/register}" 
+       class="nav-item" th:classappend="${activeNav == 'register' ? 'active' : ''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      <span>Register Student</span>
+    </a>
+  </nav>
+
+  <!-- Sidebar Footer: Active Student Switcher -->
+  <div class="sidebar-footer">
+    <div class="active-profile-card">
+      <div class="profile-avatar-circle active-student-avatar">A</div>
+      <div class="profile-info-text">
+        <div class="profile-name active-student-name">Loading Profile...</div>
+        <div class="profile-role">Active Student <span class="active-student-id">#1</span></div>
+      </div>
+      <button class="student-switch-btn" title="Switch Student" onclick="SkillSwap.promptSwitchStudent()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- Reusable Top Header Fragment -->
+<header class="top-navbar" th:fragment="header(title)">
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <div class="page-title-area">
+      <h2 th:text="${title}">Dashboard</h2>
+    </div>
+  </div>
+
+  <div class="top-navbar-actions">
+    <!-- Search Bar -->
+    <div class="header-search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="globalSearchInput" placeholder="Search skills (e.g. Java, UI)...">
+    </div>
+
+    <!-- Quick Action Button -->
+    <a th:href="@{/skills(studentId=${activeStudentId})}" class="btn btn-primary btn-sm">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      <span>Add Skill</span>
+    </a>
+
+    <!-- Switcher Button -->
+    <button class="btn btn-secondary btn-sm" onclick="SkillSwap.promptSwitchStudent()" title="Switch active student">
+      <span>Switch User</span>
+    </button>
+  </div>
+</header>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Skill Matches - SkillSwap</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- Sidebar -->
+  <div th:replace="~{fragments/navigation :: sidebar('matches')}"></div>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div th:replace="~{fragments/navigation :: header('Smart Skill Matches')}"></div>
+
+    <div class="page-container">
+      <!-- Info Header Banner -->
+      <div style="background: linear-gradient(135deg, var(--soft-mint), #EBFDF3); border: 1.5px solid var(--primary-mint); border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+            <span class="badge badge-intermediate">100% Mutual Synergy</span>
+            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Active: <strong class="active-student-name">Student</strong></span>
+          </div>
+          <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--deep-forest);">
+            Reciprocal Skill Exchange Matches
+          </h2>
+          <p style="color: var(--text-light); font-size: 0.92rem; max-width: 620px;">
+            Our SQL matching engine identifies students where a complete two-way trade exists: they teach what you want to learn, and they want to learn what you can teach!
+          </p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-secondary btn-sm" onclick="SkillSwap.loadAllPlatformMatches()">
+            Explore All Platform Matches
+          </button>
+          <a th:href="@{/skills(studentId=${activeStudentId})}" class="btn btn-primary btn-sm">
+            + Add More Skills
+          </a>
+        </div>
+      </div>
+
+      <!-- Matches Container -->
+      <div id="matchesListContainer">
+        <div class="loading-box"><div class="spinner"></div><p>Calculating mutual skill matches...</p></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    SkillSwap.initMatches();
+  });
+</script>
+</body>
+</html>

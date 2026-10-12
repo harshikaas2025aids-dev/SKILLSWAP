@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Skills - SkillSwap</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- Sidebar -->
+  <div th:replace="~{fragments/navigation :: sidebar('search')}"></div>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div th:replace="~{fragments/navigation :: header('Explore & Search Skills')}"></div>
+
+    <div class="page-container">
+      <!-- Search & Filter Card -->
+      <div class="card" style="margin-bottom: 28px; background: var(--card-white);">
+        <form id="skillsSearchFilterForm" style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 16px; align-items: flex-end;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="searchKeywordInput">Search Keyword</label>
+            <input type="text" id="searchKeywordInput" class="form-control" placeholder="Search by skill name (e.g. Java, Python, UI Design)...">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="searchTypeFilter">Skill Type</label>
+            <select id="searchTypeFilter" class="form-control">
+              <option value="">All Types (TEACH &amp; LEARN)</option>
+              <option value="TEACH">TEACH (Offered Skills)</option>
+              <option value="LEARN">LEARN (Wanted Skills)</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="searchProficiencyFilter">Proficiency Level</label>
+            <select id="searchProficiencyFilter" class="form-control">
+              <option value="">All Proficiencies</option>
+              <option value="BEGINNER">BEGINNER</option>
+              <option value="INTERMEDIATE">INTERMEDIATE</option>
+              <option value="ADVANCED">ADVANCED</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-forest" style="height: 48px; padding: 0 24px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Search Results Grid -->
+      <div id="searchResultsContainer">
+        <div class="loading-box"><div class="spinner"></div><p>Searching skills database...</p></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    SkillSwap.initSearch();
+  });
+</script>
+</body>
+</html>

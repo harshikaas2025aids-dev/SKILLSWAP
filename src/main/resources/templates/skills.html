@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Skills - SkillSwap</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- Sidebar -->
+  <div th:replace="~{fragments/navigation :: sidebar('skills')}"></div>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div th:replace="~{fragments/navigation :: header('Manage Skills')}"></div>
+
+    <div class="page-container">
+      <div style="display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: start;">
+        <!-- Add Skill Form Card -->
+        <div class="card" style="border-top: 4px solid var(--deep-forest);">
+          <div class="card-header" style="margin-bottom: 14px;">
+            <div class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              <span>Add New Skill</span>
+            </div>
+          </div>
+          <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 18px;">
+            List skills you can share or skills you desire to learn from peers.
+          </p>
+
+          <form id="addSkillForm">
+            <div class="form-group">
+              <label class="form-label" for="skillTypeSelect">Skill Intent *</label>
+              <select id="skillTypeSelect" class="form-control" required>
+                <option value="TEACH">TEACH (I can teach this to others)</option>
+                <option value="LEARN">LEARN (I want to learn this skill)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="skillNameInput">Skill Name *</label>
+              <input type="text" id="skillNameInput" class="form-control" placeholder="e.g. Java, UI Design, Python, Figma" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="proficiencySelect">Proficiency Level *</label>
+              <select id="proficiencySelect" class="form-control" required>
+                <option value="BEGINNER">BEGINNER (Novice / Foundations)</option>
+                <option value="INTERMEDIATE" selected>INTERMEDIATE (Practical competence)</option>
+                <option value="ADVANCED">ADVANCED (High expertise)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="skillDescInput">Description / Curriculum Notes</label>
+              <textarea id="skillDescInput" class="form-control" placeholder="Topics you cover or specific areas you want help with..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <span>+ Add to My Profile</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Registered Skills Showcase -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--deep-forest);">My Registered Skills</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">
+                Managing skills for <strong class="active-student-name">Active Student</strong> (<span class="active-student-id">#1</span>)
+              </p>
+            </div>
+            <a th:href="@{/matches(studentId=${activeStudentId})}" class="btn btn-forest btn-sm">
+              <span>View Mutual Matches &rarr;</span>
+            </a>
+          </div>
+
+          <div id="skillsListContainer">
+            <div class="loading-box"><div class="spinner"></div><p>Loading skills...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    SkillSwap.initSkills();
+  });
+</script>
+</body>
+</html>
